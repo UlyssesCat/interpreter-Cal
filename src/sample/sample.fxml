@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="278.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <GridPane layoutX="-1.0" layoutY="180.0" prefHeight="232.0" prefWidth="279.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="117.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="117.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="117.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="123.0" minWidth="10.0" prefWidth="121.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="47.0" minHeight="0.0" prefHeight="38.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btn_left" mnemonicParsing="false" onAction="#left_click" prefHeight="109.0" prefWidth="145.0" text="(" />
+            <Button fx:id="btn_right" mnemonicParsing="false" onAction="#right_click" prefHeight="126.0" prefWidth="176.0" text=")" GridPane.columnIndex="1" />
+            <Button fx:id="btn_delete" mnemonicParsing="false" onAction="#btn_delete_click" prefHeight="60.0" prefWidth="135.0" text="D" GridPane.columnIndex="2" />
+            <Button fx:id="btn_clear" mnemonicParsing="false" onAction="#btn_clear_click" prefHeight="73.0" prefWidth="130.0" text="C" GridPane.columnIndex="3" />
+            <Button fx:id="btn_7" mnemonicParsing="false" onAction="#btn_7_click" prefHeight="71.0" prefWidth="141.0" text="7" GridPane.rowIndex="1" />
+            <Button fx:id="btn_8" mnemonicParsing="false" onAction="#btn_8_click" prefHeight="84.0" prefWidth="119.0" text="8" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="btn_9" mnemonicParsing="false" onAction="#btn_9_click" prefHeight="94.0" prefWidth="153.0" text="9" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="btn_div" mnemonicParsing="false" onAction="#div_click" prefHeight="89.0" prefWidth="154.0" text="/" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button fx:id="btn_4" mnemonicParsing="false" onAction="#btn_4_click" prefHeight="85.0" prefWidth="145.0" text="4" GridPane.rowIndex="2" />
+            <Button fx:id="btn_5" mnemonicParsing="false" onAction="#btn_5_click" prefHeight="66.0" prefWidth="149.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="btn_6" mnemonicParsing="false" onAction="#btn_6_click" prefHeight="79.0" prefWidth="158.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="btn_mul" mnemonicParsing="false" onAction="#mul_click" prefHeight="65.0" prefWidth="141.0" text="*" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button fx:id="btn_1" mnemonicParsing="false" onAction="#btn_1_click" prefHeight="70.0" prefWidth="155.0" text="1" GridPane.rowIndex="3" />
+            <Button fx:id="btn_2" mnemonicParsing="false" onAction="#btn_2_click" prefHeight="89.0" prefWidth="124.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="btn_3" mnemonicParsing="false" onAction="#btn_3_click" prefHeight="78.0" prefWidth="132.0" text="3" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="btn_minus" mnemonicParsing="false" onAction="#minus_click" prefHeight="64.0" prefWidth="125.0" text="-" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button fx:id="btn_0" mnemonicParsing="false" onAction="#btn_0_click" prefHeight="59.0" prefWidth="155.0" text="0" GridPane.rowIndex="4" />
+            <Button fx:id="btn_dot" mnemonicParsing="false" onAction="#btn_dot_click" prefHeight="75.0" prefWidth="144.0" text="." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="btn_equals" mnemonicParsing="false" onAction="#btn_equals_click" prefHeight="74.0" prefWidth="125.0" text="=" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button fx:id="btn_plus" mnemonicParsing="false" onAction="#plus_click" prefHeight="64.0" prefWidth="214.0" text="+" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+         </children>
+      </GridPane>
+      <TextArea fx:id="Text_input" layoutX="8.0" layoutY="7.0" prefHeight="108.0" prefWidth="262.0" />
+      <TextField fx:id="Text_output" layoutX="10.0" layoutY="124.0" prefHeight="45.0" prefWidth="262.0" />
+   </children>
+</Pane>
