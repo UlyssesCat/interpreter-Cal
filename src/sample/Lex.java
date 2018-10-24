@@ -46,38 +46,62 @@ public class Lex {
                 sb.delete(0,sb.length());
                 if(arr[i]=='+')
                 {
+                    if(i==arr.length-1)
+                    {
+                        System.out.println("缺少操作数 "+",position: "+(i));
+                        System.exit(-1);
+                    }
                     if((!isNumeric(String.valueOf(arr[i+1])))&&(arr[i+1]!='('))
                     {
                         System.out.println("操作符后应为数字或表达式 "+",position: "+(i+1));
                         System.exit(-1);
                     }
+
                     arrayList.add(arr[i]+"");
                 }
                 if(arr[i]=='-')
                 {
+                    if(i==arr.length-1)
+                    {
+                        System.out.println("缺少操作数 "+",position: "+(i));
+                        System.exit(-1);
+                    }
                     if((!isNumeric(String.valueOf(arr[i+1])))&&(arr[i+1]!='('))
                     {
                         System.out.println("操作符后应为数字或表达式"+",position: "+(i+1));
                         System.exit(-1);
                     }
+
                     arrayList.add(arr[i]+"");
                 }
                 if(arr[i]=='*')
                 {
+                    if(i==arr.length-1)
+                    {
+                        System.out.println("缺少操作数 "+",position: "+(i));
+                        System.exit(-1);
+                    }
                     if((!isNumeric(String.valueOf(arr[i+1])))&&(arr[i+1]!='('))
                     {
                         System.out.println("操作符后应为数字或表达式"+",position: "+(i+1));
                         System.exit(-1);
                     }
+
                     arrayList.add(arr[i]+"");
                 }
                 if(arr[i]=='/')
                 {
+                    if(i==arr.length-1)
+                    {
+                        System.out.println("缺少操作数 "+",position: "+(i));
+                        System.exit(-1);
+                    }
                     if(arr[i+1]=='0')
                     {
                         System.out.println("除数不能为0"+",position: "+(i+1));
                         System.exit(-1);
                     }
+
                     if((!isNumeric(String.valueOf(arr[i+1])))&&(arr[i+1]!='('))
                     {
                         System.out.println("操作符后应为数字或表达式"+",position: "+(i+1));

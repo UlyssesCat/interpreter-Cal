@@ -1,4 +1,5 @@
 package sample;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -18,16 +19,16 @@ public class Grammar {
     public  String gramAnalysis() {
         if(iter.hasNext()){
             head = (token)iter.next();
-            double r= expr();
+            BigDecimal r= expr();
             String reString=String.valueOf(r);
             return reString;
         }
         return "";
     }
 
-    public  double expr() {
-        double result = term();
-        double tempResult;
+    public  BigDecimal expr() {
+        BigDecimal result = term();
+        BigDecimal tempResult;
         String operate;
         while ((operate = head.s).equals("+") || operate.equals("-")) {
             if(iter.hasNext())
@@ -35,19 +36,19 @@ public class Grammar {
             tempResult = term();
             switch (operate) {
                 case "+":
-                    System.out.println(result + "+" + tempResult + "=" + (result + tempResult));
-                    result += tempResult;
+                    System.out.println(result + "+" + tempResult + "=" + (result.add(tempResult) ));
+                    result = result.add(tempResult);
                     break;
                 case "-":
-                    System.out.println(result + "-" + tempResult + "=" + (result - tempResult));
-                    result -= tempResult;
+                    System.out.println(result + "-" + tempResult + "=" + (result.subtract(tempResult) ));
+                    result = result.subtract(tempResult) ;
             }
         }
         return result;
     }
-    public  double term(){
-        double result = factor();
-        double tempResult;
+    public  BigDecimal term(){
+        BigDecimal result = factor();
+        BigDecimal tempResult;
         String operate;
         while ((operate = head.s).equals("*") || operate.equals("/")) {
             if(iter.hasNext())
@@ -55,25 +56,25 @@ public class Grammar {
             tempResult = factor();
             switch (operate) {
                 case "*":
-                    System.out.println(result + "*" + tempResult + "=" + (result * tempResult));
-                    result *= tempResult;
+                    System.out.println(result + "*" + tempResult + "=" + (result.multiply(tempResult) ));
+                    result = result.multiply(tempResult) ;
                     break;
                 case "/":
-                    if(tempResult==0)
+                    if(tempResult.equals(0))
                     {
                         System.out.println("除数不能为0");
                         System.exit(-1);
                     }
-                    System.out.println(result + "/" + tempResult + "=" + (result / tempResult));
-                    result /= tempResult;
+                    System.out.println(result + "/" + tempResult + "=" + (result.divide(tempResult) ));
+                    result = result.divide(tempResult) ;
             }
         }
         return result;
     }
-    public  double factor(){
-        double factor=0;
+    public  BigDecimal factor(){
+        BigDecimal factor = null;
         if(head.name.equals("NUMBER")){
-            factor=Double.parseDouble(head.s);
+            factor=new BigDecimal(head.s);
             if(iter.hasNext())
                 head = (token)iter.next();
         }else{
