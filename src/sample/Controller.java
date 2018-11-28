@@ -2,6 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -84,11 +85,43 @@ public class Controller {
     @FXML
     private void btn_equals_click(ActionEvent e){ Text_output.setText(Interpreter(Text_input.getText())); }
 
+    public static String er="";
+    public static String tree="";
     private String Interpreter(String input){
         ArrayList<token> tokenList = new ArrayList<>();
         tokenList = lexAnalysis(input);
+
+        //////
+        String sarr[]=new String[tokenList.size()];
+        for(int i=0;i<tokenList.size();i++)
+        {
+            sarr[i]=tokenList.get(i).s;
+        }
+
+        BTree.printFromTopToBottom(BTree.createBinaryTree(sarr),tree);
+        //////
+
+
         Grammar g = new Grammar(tokenList);
         String output = g.gramAnalysis();
+
+        if(er!="") {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText("Look, an warning Dialog");
+            alert.setContentText(er);
+            alert.showAndWait();
+        }else
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText("Tree");
+            alert.setContentText(tree);
+            alert.show();
+        }
+
+
+
         return output;
     }
 }

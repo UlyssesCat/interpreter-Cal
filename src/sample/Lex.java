@@ -1,12 +1,15 @@
 package sample;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Lex {
 
-    public static ArrayList<token> lexAnalysis(String s){
-        char[] arr = s.toCharArray();
+    public static ArrayList<token> lexAnalysis(String input){
+        //Scanner scanner = new Scanner(System.in);
+        //String s= scanner.nextLine();
+        char[] arr = input.toCharArray();
         ArrayList<String> arrayList = new ArrayList<String>();
         int left=0;
         int right=0;
@@ -14,24 +17,25 @@ public class Lex {
         for(int i = 0 ; i<arr.length; i++)
         {
             if(i==0&&(arr[i]!='('&&arr[i]!='-'&&(!isNumeric(String.valueOf(arr[i]))))){
-                System.out.println("开头应为数字或左括号"+",position: "+i);
-                System.exit(-1);
+                System.out.println("开头应为数字或左括号"+",position: "+i+"\n");
+                Controller.er+=("开头应为数字或左括号"+",position: "+i);
+                //System.exit(-1);
             }
-            if(arr[i]=='.'||'0'<=arr[i]&&arr[i]<='9'||arr[i]=='+'&&(i==0||arr[i-1]=='(')||arr[i]=='-'&&(i==0||arr[i-1]=='('))
+            if(arr[i]=='.'||'0'<=arr[i]&&arr[i]<='9')
             {
                 if(arr[i]=='.')
                 {
                     if(!isNumeric(String.valueOf(arr[i-1])))
                     {
-
+                        Controller.er+=("表达式格式错误"+"position:"+i+"\n");
                         System.out.println("表达式格式错误"+"position:"+i);
-                        System.exit(-1);
+                        //System.exit(-1);
                     }
                     if(i==arr.length-1||!isNumeric(String.valueOf(arr[i+1])))
                     {
-
+                        Controller.er+=("表达式格式错误"+"position:"+i+"\n");
                         System.out.println("表达式格式错误"+"position:"+i);
-                        System.exit(-1);
+                        //System.exit(-1);
                     }
 
                 }
@@ -48,13 +52,15 @@ public class Lex {
                 {
                     if(i==arr.length-1)
                     {
+                        Controller.er+=("缺少操作数 "+",position: "+(i)+"\n");
                         System.out.println("缺少操作数 "+",position: "+(i));
-                        System.exit(-1);
+                        //System.exit(-1);
                     }
                     if((!isNumeric(String.valueOf(arr[i+1])))&&(arr[i+1]!='('))
                     {
+                        Controller.er+=("操作符后应为数字或表达式 "+",position: "+(i+1)+"\n");
                         System.out.println("操作符后应为数字或表达式 "+",position: "+(i+1));
-                        System.exit(-1);
+                        //System.exit(-1);
                     }
 
                     arrayList.add(arr[i]+"");
@@ -63,28 +69,35 @@ public class Lex {
                 {
                     if(i==arr.length-1)
                     {
+                        Controller.er+=("缺少操作数 "+",position: "+(i)+"\n");
                         System.out.println("缺少操作数 "+",position: "+(i));
-                        System.exit(-1);
+                        //System.exit(-1);
                     }
                     if((!isNumeric(String.valueOf(arr[i+1])))&&(arr[i+1]!='('))
                     {
+                        Controller.er+=("操作符后应为数字或表达式"+",position: "+(i+1)+"\n");
                         System.out.println("操作符后应为数字或表达式"+",position: "+(i+1));
-                        System.exit(-1);
+                        //System.exit(-1);
                     }
-
+                    if(i==0||arr[i-1]=='(')
+                    {
+                        arrayList.add("0");
+                    }
                     arrayList.add(arr[i]+"");
                 }
                 if(arr[i]=='*')
                 {
                     if(i==arr.length-1)
                     {
+                        Controller.er+=("缺少操作数 "+",position: "+(i)+"\n");
                         System.out.println("缺少操作数 "+",position: "+(i));
-                        System.exit(-1);
+                        //System.exit(-1);
                     }
                     if((!isNumeric(String.valueOf(arr[i+1])))&&(arr[i+1]!='('))
                     {
+                        Controller.er+=("操作符后应为数字或表达式"+",position: "+(i+1)+"\n");
                         System.out.println("操作符后应为数字或表达式"+",position: "+(i+1));
-                        System.exit(-1);
+                        //System.exit(-1);
                     }
 
                     arrayList.add(arr[i]+"");
@@ -93,19 +106,16 @@ public class Lex {
                 {
                     if(i==arr.length-1)
                     {
+                        Controller.er+=("缺少操作数 "+",position: "+(i)+"\n");
                         System.out.println("缺少操作数 "+",position: "+(i));
-                        System.exit(-1);
-                    }
-                    if(arr[i+1]=='0')
-                    {
-                        System.out.println("除数不能为0"+",position: "+(i+1));
-                        System.exit(-1);
+                        //System.exit(-1);
                     }
 
                     if((!isNumeric(String.valueOf(arr[i+1])))&&(arr[i+1]!='('))
                     {
+                        Controller.er+=("操作符后应为数字或表达式"+",position: "+(i+1)+"\n");
                         System.out.println("操作符后应为数字或表达式"+",position: "+(i+1));
-                        System.exit(-1);
+                        //System.exit(-1);
                     }
                     arrayList.add(arr[i]+"");
                 }
@@ -126,15 +136,17 @@ public class Lex {
             }
             else
             {
+                Controller.er+=("表达式含有非法字符"+",position: "+i+"\n");
                 System.out.println("表达式含有非法字符"+",position: "+i);
-                System.exit(0);
+                //System.exit(0);
             }
         }
 
         if(left!=right)
         {
+            Controller.er+=("括号不匹配\n");
             System.out.println("括号不匹配");
-            System.exit(0);
+            //System.exit(0);
         }
         ArrayList<token> arrayList1 = new ArrayList<token>();
         for(int i=0;i<arrayList.size();i++)
