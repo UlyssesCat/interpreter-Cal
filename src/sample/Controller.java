@@ -91,15 +91,7 @@ public class Controller {
         ArrayList<token> tokenList = new ArrayList<>();
         tokenList = lexAnalysis(input);
 
-        //////
-        String sarr[]=new String[tokenList.size()];
-        for(int i=0;i<tokenList.size();i++)
-        {
-            sarr[i]=tokenList.get(i).s;
-        }
 
-        BTree.printFromTopToBottom(BTree.createBinaryTree(sarr),tree);
-        //////
 
 
         Grammar g = new Grammar(tokenList);
@@ -113,6 +105,16 @@ public class Controller {
             alert.showAndWait();
         }else
         {
+            //////
+            String sarr[]=new String[tokenList.size()];
+            for(int i=0;i<tokenList.size();i++)
+            {
+                sarr[i]=tokenList.get(i).s;
+            }
+
+            BTree.printFromTopToBottom(BTree.createBinaryTree(sarr),tree);
+            //////
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText("Tree");

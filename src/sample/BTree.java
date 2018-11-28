@@ -3,7 +3,9 @@ package sample;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
- 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class BTree {
  
 	static class TreeNode {
@@ -138,18 +140,16 @@ public class BTree {
 	/**
 	 * 判断是否为数字
 	 * 
-	 * @param s
+	 * @param str
 	 * @return
 	 */
-	static boolean isDigit(String s) {
- 
-		for (int i = 0; i < s.length(); i++) {
- 
-			if (!Character.isDigit(s.charAt(i)))
- 
-				return false;
+	static boolean isDigit(String str) {
+
+		Pattern pattern = Pattern.compile("([1-9]\\d*\\.?\\d*)|(0\\.\\d*[1-9])");
+		Matcher isNum = pattern.matcher(str);
+		if( !isNum.matches() ){
+			return false;
 		}
- 
 		return true;
 	}
  
