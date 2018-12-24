@@ -11,7 +11,6 @@ public class Grammar {
     public Iterator iter ;
 
 
-
     public Grammar(ArrayList<token> tl){
         tokenList =(ArrayList<token>) tl.clone();
         iter = tokenList.iterator();
@@ -19,7 +18,11 @@ public class Grammar {
     public  String gramAnalysis() {
         if(iter.hasNext()){
             head = (token)iter.next();
+
+
+
             BigDecimal r= expr();
+            if(r==null) return "";
             // String reString=String.valueOf(r)
             //System.out.println(r.toPlainString());
             return r.toPlainString();
@@ -31,13 +34,20 @@ public class Grammar {
     }
 
     public  BigDecimal expr() {
+
+
+
         BigDecimal result = term();
         BigDecimal tempResult;
         String operate;
         while ((operate = head.s).equals("+") || operate.equals("-")) {
+
+
+
             if(iter.hasNext())
                 head = (token)iter.next();
             tempResult = term();
+            if(tempResult==null) return null;
             switch (operate) {
                 case "+":
                     System.out.println(result + "+" + tempResult + "=" + (result.add(tempResult)));
@@ -51,6 +61,8 @@ public class Grammar {
         return result;
     }
     public  BigDecimal term(){
+
+
         BigDecimal result = factor();
         BigDecimal tempResult;
         String operate;
@@ -58,6 +70,7 @@ public class Grammar {
             if(iter.hasNext())
                 head = (token)iter.next();
             tempResult = factor();
+            if(tempResult==null) return null;
             switch (operate) {
                 case "*":
                     System.out.println(result + "*" + tempResult + "=" + (result.multiply(tempResult)));
@@ -69,15 +82,18 @@ public class Grammar {
                     if(tempResult.compareTo(BigDecimal.ZERO)==0)
                     {
                         System.out.println("除数不能为0!!");
+
                         Controller.er+=("除数不能为0!!");
+                        return null;
                     }
                     System.out.println(result + "/" + tempResult + "=" + (result.divide(tempResult,3,BigDecimal.ROUND_HALF_UP)));
-                    result=result.divide(tempResult);
+                    result=result.divide(tempResult,3,BigDecimal.ROUND_HALF_UP);
             }
         }
         return result;
     }
     public  BigDecimal factor(){
+
         BigDecimal factor=null;
         if(head.name.equals("NUMBER")){
             factor=new BigDecimal(head.s);
@@ -90,6 +106,8 @@ public class Grammar {
             else{
                 System.out.println("括号内无数字");
                 Controller.er+=("括号内无数字");
+                return null;
+
                 //System.exit(-1);
             }
             match(")");
@@ -104,7 +122,7 @@ public class Grammar {
                 head = (token)iter.next();
             return true;
         }
-        Controller.er+=("syntax error at "+head+"\n");
+        //Controller.er+=("syntax error at "+head+"\n");
         //System.out.println("syntax error at "+head);
         return  false;
         //throw new RuntimeException("syntax error at "+head);

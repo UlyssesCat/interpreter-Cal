@@ -14,11 +14,15 @@ public class Lex {
         int left=0;
         int right=0;
         StringBuilder sb = new StringBuilder();
+
+
+
         for(int i = 0 ; i<arr.length; i++)
         {
             if(i==0&&(arr[i]!='('&&arr[i]!='-'&&(!isNumeric(String.valueOf(arr[i]))))){
                 System.out.println("开头应为数字或左括号"+",position: "+i+"\n");
                 Controller.er+=("开头应为数字或左括号"+",position: "+i);
+                break;
                 //System.exit(-1);
             }
             if(arr[i]=='.'||'0'<=arr[i]&&arr[i]<='9')
@@ -29,12 +33,14 @@ public class Lex {
                     {
                         Controller.er+=("表达式格式错误"+"position:"+i+"\n");
                         System.out.println("表达式格式错误"+"position:"+i);
+                       break;
                         //System.exit(-1);
                     }
                     if(i==arr.length-1||!isNumeric(String.valueOf(arr[i+1])))
                     {
                         Controller.er+=("表达式格式错误"+"position:"+i+"\n");
                         System.out.println("表达式格式错误"+"position:"+i);
+                        break;
                         //System.exit(-1);
                     }
 
@@ -54,12 +60,14 @@ public class Lex {
                     {
                         Controller.er+=("缺少操作数 "+",position: "+(i)+"\n");
                         System.out.println("缺少操作数 "+",position: "+(i));
+                        break;
                         //System.exit(-1);
                     }
                     if((!isNumeric(String.valueOf(arr[i+1])))&&(arr[i+1]!='('))
                     {
                         Controller.er+=("操作符后应为数字或表达式 "+",position: "+(i+1)+"\n");
                         System.out.println("操作符后应为数字或表达式 "+",position: "+(i+1));
+                        break;
                         //System.exit(-1);
                     }
 
@@ -71,13 +79,14 @@ public class Lex {
                     {
                         Controller.er+=("缺少操作数 "+",position: "+(i)+"\n");
                         System.out.println("缺少操作数 "+",position: "+(i));
+                        break;
                         //System.exit(-1);
                     }
                     if((!isNumeric(String.valueOf(arr[i+1])))&&(arr[i+1]!='('))
                     {
                         Controller.er+=("操作符后应为数字或表达式"+",position: "+(i+1)+"\n");
                         System.out.println("操作符后应为数字或表达式"+",position: "+(i+1));
-                        //System.exit(-1);
+                        break;//System.exit(-1);
                     }
                     if(i==0||arr[i-1]=='(')
                     {
@@ -91,12 +100,14 @@ public class Lex {
                     {
                         Controller.er+=("缺少操作数 "+",position: "+(i)+"\n");
                         System.out.println("缺少操作数 "+",position: "+(i));
+                        break;
                         //System.exit(-1);
                     }
                     if((!isNumeric(String.valueOf(arr[i+1])))&&(arr[i+1]!='('))
                     {
                         Controller.er+=("操作符后应为数字或表达式"+",position: "+(i+1)+"\n");
                         System.out.println("操作符后应为数字或表达式"+",position: "+(i+1));
+                        break;
                         //System.exit(-1);
                     }
 
@@ -108,6 +119,7 @@ public class Lex {
                     {
                         Controller.er+=("缺少操作数 "+",position: "+(i)+"\n");
                         System.out.println("缺少操作数 "+",position: "+(i));
+                        break;
                         //System.exit(-1);
                     }
 
@@ -115,6 +127,7 @@ public class Lex {
                     {
                         Controller.er+=("操作符后应为数字或表达式"+",position: "+(i+1)+"\n");
                         System.out.println("操作符后应为数字或表达式"+",position: "+(i+1));
+                        break;
                         //System.exit(-1);
                     }
                     arrayList.add(arr[i]+"");
@@ -138,6 +151,7 @@ public class Lex {
             {
                 Controller.er+=("表达式含有非法字符"+",position: "+i+"\n");
                 System.out.println("表达式含有非法字符"+",position: "+i);
+                break;
                 //System.exit(0);
             }
         }
@@ -162,7 +176,7 @@ public class Lex {
     }
 
     public static boolean isNumeric(String str){
-        Pattern pattern = Pattern.compile("[0-9]*");
+        Pattern pattern = Pattern.compile("([0-9]\\d*\\.?\\d*)|(0\\.\\d*[0-9])");
         Matcher isNum = pattern.matcher(str);
         if( !isNum.matches() ){
             return false;

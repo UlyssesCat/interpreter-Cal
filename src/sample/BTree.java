@@ -143,16 +143,17 @@ public class BTree {
 	 * @param str
 	 * @return
 	 */
+
 	static boolean isDigit(String str) {
 
-		Pattern pattern = Pattern.compile("([1-9]\\d*\\.?\\d*)|(0\\.\\d*[1-9])");
+		Pattern pattern = Pattern.compile("([0-9]\\d*\\.?\\d*)|(0\\.\\d*[0-9])");
 		Matcher isNum = pattern.matcher(str);
 		if( !isNum.matches() ){
 			return false;
 		}
 		return true;
 	}
- 
+
 	/**
 	 * 判断op1和op2的优先级，如果op1>op2，返回true，如果op1<=op2，返回false
 	 * 

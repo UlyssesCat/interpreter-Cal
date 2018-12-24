@@ -90,12 +90,14 @@ public class Controller {
     private String Interpreter(String input){
         ArrayList<token> tokenList = new ArrayList<>();
         tokenList = lexAnalysis(input);
+        String output="";
 
 
+        if(er=="") {
+            Grammar g = new Grammar(tokenList);
+            output = g.gramAnalysis();
+        }
 
-
-        Grammar g = new Grammar(tokenList);
-        String output = g.gramAnalysis();
 
         if(er!="") {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -103,6 +105,11 @@ public class Controller {
             alert.setHeaderText("Look, an warning Dialog");
             alert.setContentText(er);
             alert.showAndWait();
+            er="";
+
+            Text_output.setText("");
+            output="";
+
         }else
         {
             //////
@@ -112,14 +119,15 @@ public class Controller {
                 sarr[i]=tokenList.get(i).s;
             }
 
-            BTree.printFromTopToBottom(BTree.createBinaryTree(sarr),tree);
-            //////
 
+
+            BTree.printFromTopToBottom(BTree.createBinaryTree(sarr),tree);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText("Tree");
             alert.setContentText(tree);
             alert.show();
+            tree="";
         }
 
 
